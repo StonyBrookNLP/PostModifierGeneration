@@ -20,9 +20,9 @@ python pm_generation.py prepare -data_dir dataset_location -data_out prepared_da
 
 This is using `preprocess.py` in OpenNMT system, and will genereate three following files:
 
-* `(prefix).train.pt: Pytorch file containing training data
-* `(prefix).valid.pt: Pytorch file containing validation data
-* `(prefix).vocab.pt: Pytorch file containing vocabulary data
+* `(prefix).train.pt`: Pytorch file containing training data
+* `(prefix).valid.pt`: Pytorch file containing validation data
+* `(prefix).vocab.pt`: Pytorch file containing vocabulary data
 
 ## Step 3: Train the model
 
