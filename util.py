@@ -2,6 +2,8 @@ import os
 import tempfile
 import json
 
+OpenNMT_dir = "../OpenNMT-py"
+
 def load_kb(infile, verbose=False):
     wiki_kb = {}
     with open(infile, "r") as fin:

@@ -2,7 +2,7 @@ import os
 import sys
 import argparse
 
-from util import load_kb, generate_tmp_file, unlink_tmp_file
+from util import load_kb, generate_tmp_file, unlink_tmp_file, OpenNMT_dir
 
 def build_arg_parser():
 
@@ -53,7 +53,7 @@ def data_preparation(args):
         src[set_info], tgt[set_info] = generate_tmp_file(os.path.join(args.data_dir, set_info), wiki_kb[set_info])
         arguments += "-{}_src {} -{}_tgt {} ".format(set_info, src[set_info], set_info, tgt[set_info])
 
-    script = "python OpenNMT-py/preprocess.py {}-save_data {} -src_seq_length 1000".format(arguments, args.data_out)
+    script = "python {}/preprocess.py {}-save_data {} -src_seq_length 1000".format(OpenNMT_dir, arguments, args.data_out)
 
     print(script)
     os.system(script)
@@ -67,8 +67,8 @@ def train(args):
     batch_size = 32
     attention = "general"
 
-    script = "python OpenNMT-py/train.py -data {} -save_model {} -gpuid 0 \
-            -global_attention {} -batch_size {} -encoder_type {}".format(args.data, args.model, attention, batch_size, rnn_type)
+    script = "python {}/train.py -data {} -save_model {} -gpuid 0 \
+            -global_attention {} -batch_size {} -encoder_type {}".format(OpenNMT_dir, args.data, args.model, attention, batch_size, rnn_type)
 
     print(script)
     os.system(script)
@@ -78,7 +78,7 @@ def generate(args):
     wiki_kb = load_kb(os.path.join(args.data_dir, "{}.wiki".format(args.dataset)))
     src, tgt = generate_tmp_file(os.path.join(args.data_dir, args.dataset), wiki_kb)
 
-    script = "python OpenNMT-py/translate.py -model {} -src {} -output {} -replace_unk -verbose".format(args.model, src, args.out)
+    script = "python {}/translate.py -model {} -src {} -output {} -replace_unk -verbose".format(OpenNMT_dir, args.model, src, args.out)
 
     os.system(script)
 
