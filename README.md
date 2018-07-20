@@ -1,7 +1,7 @@
 # Post Modifier Generation Baseline
 
 This is a baseline system for TTIC 2018 [Post-modifier Generation](https://sites.google.com/view/tticlanggen-2018/hackathon/post-modifier-generation) task.
-This system is developed using [OpenNMT](https://github.com/OpenNMT/OpenNMT), an open-source neural machine translation system.
+This system is developed using [OpenNMT-py](https://github.com/OpenNMT/OpenNMT-py), an open-source neural machine translation system.
 
 ## Quickstart
 
@@ -39,4 +39,4 @@ python pm_generation.py generate -data_dir dataset_location -dataset dataset_pre
 
 This is using `translate.py` in OpenNMT system
 
-For more detailed information, pleaes refer [OpenNMT repository](https://github.com/OpenNMT/OpenNMT-py#quickstart) or [OpenNMT document](http://opennmt.net/OpenNMT-py).
+For more detailed information, pleaes refer [OpenNMT-py repository](https://github.com/OpenNMT/OpenNMT-py#quickstart) or [OpenNMT-py document](http://opennmt.net/OpenNMT-py).
