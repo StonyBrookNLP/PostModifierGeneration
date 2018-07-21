@@ -34,11 +34,9 @@ As a seq2seq model, the model takes source sequences and target sequences. In ou
 Example:
 
 -Source(input)
-
 Haitham al-Haddad is one preacher under scrutiny according to Whitehall officials . <rel> instance of </rel> <value> human </value> <rel> sex or gender </rel> <value> male </value> <rel> educated at </rel> <value> SOAS, University of London </value> <rel> occupation </rel> <value> Islamic studies scholar </value>
 
 -Target(output)
-
 an Islamic scholar
 ```
 
@@ -49,7 +47,7 @@ python pm_generation.py train -data data_prefix -model model_dir
 ```
 
 This is using `train.py` in OpenNMT system. The model consists of a 2-layer biLSTM with 500 hidden units on the encoder and a 2-layer LSTM with 500 hidden units on the decoder.
-Attention is used the *general* scheme, which is multipicative global attention. 
+Attention is used the *general* scheme, which is a multipicative global attention. 
 
 ### Step 4: Generate Post-modifier
 ```bash
