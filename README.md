@@ -44,3 +44,7 @@ python pm_generation.py generate -data_dir dataset_location -dataset dataset_pre
 This is using `translate.py` in OpenNMT system
 
 For more detailed information, pleaes refer [OpenNMT-py repository](https://github.com/OpenNMT/OpenNMT-py#quickstart) or [OpenNMT-py document](http://opennmt.net/OpenNMT-py).
+
+### Pretrained model
+
+You can download pretrained model form [here](https://drive.google.com/file/d/1FvbA7L9T2CfhaRWv1_9hCDsKW8Jq_1ci/view?usp=sharing)
