@@ -56,7 +56,7 @@ Attention is used the *general* scheme, which is a multipicative global attentio
 python pm_generation.py generate -data_dir dataset_location -dataset dataset_prefix  -model model_dir -out output_file
 ```
 
-This is using `translate.py` in OpenNMT system.
+This is using `translate.py` in OpenNMT system. The setting remains the same as the default (beam size = 5).
 
 For further information, pleaes refer [OpenNMT-py repository](https://github.com/OpenNMT/OpenNMT-py#quickstart) or [OpenNMT-py document](http://opennmt.net/OpenNMT-py).
 
