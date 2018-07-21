@@ -49,11 +49,11 @@ python pm_generation.py train -data data_prefix -model model_dir
 ```
 
 This is using `train.py` in OpenNMT system. The model consists of a 2-layer biLSTM with 500 hidden units on the encoder and a 2-layer LSTM with 500 hidden units on the decoder.
-Attention is used the *general* scheme, which is a multipicative global attention. 
+Attention is used the *general* scheme, which is a multiplicative global attention with one weight matrix. 
 
 ### Step 4: Generate Post-modifier
 ```bash
-python pm_generation.py generate -data_dir dataset_location -dataset dataset_prefix  -model model_dir -out output_file
+python pm_generation.py generate -data_dir dataset_location -dataset dataset_prefix -model model_dir -out output_file
 ```
 
 This is using `translate.py` in OpenNMT system. The setting remains the same as the default (beam size = 5).
