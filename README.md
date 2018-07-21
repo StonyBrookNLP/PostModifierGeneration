@@ -3,6 +3,10 @@
 This is a baseline system for TTIC 2018 [Post-modifier Generation](https://sites.google.com/view/tticlanggen-2018/hackathon/post-modifier-generation) task.
 This system is developed using [OpenNMT-py](https://github.com/OpenNMT/OpenNMT-py), an open-source neural machine translation system.
 
+## Prerequisite
+
+You will need [Post-modifier dataset](https://github.com/StonyBrookNLP/PostModifier) and [OpenNMT-py](https://github.com/OpenNMT/OpenNMT-py) to run the system.
+
 ## Quickstart
 
 ## Step 1: Set OpenNMT path
