@@ -35,7 +35,7 @@ Example:
 
 -Source(input)
 Haitham al-Haddad is one preacher under scrutiny according to Whitehall officials . <rel> instance of \
-</rel> <value> human </value> <rel> sex or gender </rel> <value> male </value> <rel> educated at </rel>\ 
+</rel> <value> human </value> <rel> sex or gender </rel> <value> male </value> <rel> educated at </rel> \ 
 <value> SOAS, University of London </value> <rel> occupation </rel> <value> Islamic studies scholar </value>
 
 -Target(output)
