@@ -50,7 +50,7 @@ def data_preparation(args):
     arguments = ""
     for set_info in dataset:
         wiki_kb[set_info] = load_kb(os.path.join(args.data_dir, "{}.wiki".format(set_info)))
-        src[set_info], tgt[set_info] = generate_tmp_file(os.path.join(args.data_dir, set_info), wiki_kb[set_info])
+        src[set_info], tgt[set_info] = generate_tmp_file(os.path.join(args.data_dir, "{}.pm".format(set_info)), wiki_kb[set_info])
         arguments += "-{}_src {} -{}_tgt {} ".format(set_info, src[set_info], set_info, tgt[set_info])
 
     script = "python {}/preprocess.py {}-save_data {} -src_seq_length 1000".format(OpenNMT_dir, arguments, args.data_out)
@@ -76,7 +76,7 @@ def train(args):
 def generate(args):
 
     wiki_kb = load_kb(os.path.join(args.data_dir, "{}.wiki".format(args.dataset)))
-    src, tgt = generate_tmp_file(os.path.join(args.data_dir, args.dataset), wiki_kb)
+    src, tgt = generate_tmp_file(os.path.join(args.data_dir, "{}.pm".format(args.dataset)), wiki_kb)
 
     script = "python {}/translate.py -model {} -src {} -output {} -replace_unk -verbose".format(OpenNMT_dir, args.model, src, args.out)
 
