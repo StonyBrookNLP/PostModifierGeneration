@@ -13,9 +13,8 @@ def load_kb(infile, verbose=False):
             wiki_kb[row[0]]['label'] = row[1]
             wiki_kb[row[0]]['aliases'] = row[2].split(",")
             wiki_kb[row[0]]['description'] = row[3].split(",")
-            wiki_kb[row[0]]['claims_raw'] = row[4]
             wiki_kb[row[0]]['claims'] = {}
-            for claims in json.loads(row[5]):
+            for claims in json.loads(row[4]):
                 for k, v in claims.items():
                     if k == "property":
                         key = v[0]
