@@ -53,7 +53,7 @@ def data_preparation(args):
         src[set_info], tgt[set_info] = generate_tmp_file(os.path.join(args.data_dir, "{}.pm".format(set_info)), wiki_kb[set_info])
         arguments += "-{}_src {} -{}_tgt {} ".format(set_info, src[set_info], set_info, tgt[set_info])
 
-    script = "python {}/preprocess.py {}-save_data {} -src_seq_length 1000".format(OpenNMT_dir, arguments, args.data_out)
+    script = "python {}/preprocess.py {}-save_data {} -src_seq_length 5000".format(OpenNMT_dir, arguments, args.data_out)
 
     print(script)
     os.system(script)
@@ -78,7 +78,7 @@ def generate(args):
     wiki_kb = load_kb(os.path.join(args.data_dir, "{}.wiki".format(args.dataset)))
     src, tgt = generate_tmp_file(os.path.join(args.data_dir, "{}.pm".format(args.dataset)), wiki_kb)
 
-    script = "python {}/translate.py -model {} -src {} -output {} -replace_unk -verbose".format(OpenNMT_dir, args.model, src, args.out)
+    script = "python {}/translate.py -model {} -src {} -output {} -gpu 0 -replace_unk -verbose".format(OpenNMT_dir, args.model, src, args.out)
 
     os.system(script)
 
