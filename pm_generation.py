@@ -8,6 +8,8 @@ def build_arg_parser():
 
     parser = argparse.ArgumentParser()
 
+    parser.add_argument('-gpuid', type=int, default=0, help="GPU ID (default:0)")
+
     subparsers = parser.add_subparsers()
 
     # Create the parser for the "prepare" command
@@ -16,6 +18,7 @@ def build_arg_parser():
             help="Path to the dataset")
     parser_prepare.add_argument('-data_out', type=str, required=True,
             help="Output file for the prepared data")
+    parser_prepare.add_argument('-share_vocab', action="store_true", help="Share the vocabs")
     parser_prepare.set_defaults(func=data_preparation)
 
     # Create the parser for the "train" command
@@ -49,11 +52,13 @@ def data_preparation(args):
 
     arguments = ""
     for set_info in dataset:
-        wiki_kb[set_info] = load_kb(os.path.join(args.data_dir, "{}.wiki".format(set_info)))
-        src[set_info], tgt[set_info] = generate_tmp_file(os.path.join(args.data_dir, "{}.pm".format(set_info)), wiki_kb[set_info])
+        wiki_kb[set_info] = load_kb(os.path.join(args.data_dir, "{}.wiki".format(set_info)), verbose=False)
+        src[set_info], tgt[set_info] = generate_tmp_file(os.path.join(args.data_dir, "{}.pm".format(set_info)), wiki_kb[set_info], verbose=False)
         arguments += "-{}_src {} -{}_tgt {} ".format(set_info, src[set_info], set_info, tgt[set_info])
 
-    script = "python {}/preprocess.py {}-save_data {} -src_seq_length 5000".format(OpenNMT_dir, arguments, args.data_out)
+    script = "python {}/preprocess.py {} -save_data {} -src_seq_length 5000".format(OpenNMT_dir, arguments, args.data_out)
+    if args.share_vocab:
+        script += " -share_vocab"
 
     print(script)
     os.system(script)
@@ -68,8 +73,7 @@ def train(args):
     attention = "general"
 
     script = "python {}/train.py -data {} -save_model {} -gpuid 0 \
-            -global_attention {} -batch_size {} -encoder_type {}".format(OpenNMT_dir, args.data, args.model, attention, batch_size, rnn_type)
-
+           -global_attention {} -batch_size {} -encoder_type {} ".format(OpenNMT_dir, args.data, args.model, attention, batch_size, rnn_type)
     print(script)
     os.system(script)
 

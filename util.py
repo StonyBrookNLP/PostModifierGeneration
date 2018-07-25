@@ -13,15 +13,8 @@ def load_kb(infile, verbose=False):
             wiki_kb[row[0]]['label'] = row[1]
             wiki_kb[row[0]]['aliases'] = row[2].split(",")
             wiki_kb[row[0]]['description'] = row[3].split(",")
-            wiki_kb[row[0]]['claims'] = {}
-            for claims in json.loads(row[4]):
-                for k, v in claims.items():
-                    if k == "property":
-                        key = v[0]
-                        if key in wiki_kb[row[0]]['claims']:
-                            wiki_kb[row[0]]['claims'][key].append(v[1])
-                        else:
-                             wiki_kb[row[0]]['claims'][key] = [v[1]]
+            wiki_kb[row[0]]['claims'] = json.loads(row[4])
+
             if verbose:
                 for k,v in wiki_kb[row[0]].items():
                     print("{}:\t{}".format(k, v))
@@ -37,9 +30,28 @@ def generate_tmp_file(infile, wiki_kb, verbose=False):
         for line in fin:
             row = line.strip().split("\t")
             source = row[0]
+            # claims = ['<claims>']
             claims = []
-            for k, v in wiki_kb[row[4]]['claims'].items():
-                claims.append("<rel> {} </rel> <value> {} </value>".format(k, " <and> ".join(v)))
+            for claim in wiki_kb[row[4]]['claims']:
+
+                if 'property' not in claim:
+                    print("This claim misses [property]: %s"%(line))
+                    continue
+
+                key, val = claim['property']
+                claims.append('<claim>')
+                claims.append("<prop> {} </prop> <val> {} </val>".format(key, val))
+
+
+                if 'qualifiers' not in claim:
+                    print("This claim misses [qualifiers]: %s" % (line))
+                    claims.append('</claim>')
+                    continue
+                for qkey, qval in claim['qualifiers']:
+                    claims.append("<qual_prop> {} </qual_prop> <qual_val> {} </qual_val>".format(qkey, qval))
+
+                claims.append('</claim>')
+            # claims.append("</claims>")
 
             source += " " + " ".join(claims)
             src_out.write(source + "\n")
@@ -51,6 +63,7 @@ def generate_tmp_file(infile, wiki_kb, verbose=False):
                 print("Sent: {}".format(row[3]))
                 print("Wiki_ID: {}".format(row[4]))
                 print("Prev_Sent: {}".format(row[5]))
+                print("claims: {}".format("\n".join(claims)))
 
     return src_path, tgt_path
 
